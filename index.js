@@ -68,3 +68,61 @@ const data = [
 			]
 	}
 ]
+
+var toppings = [];
+var ids = [];
+var batters = [];
+var batteryids = [];
+var toppingsids = [];
+var ppu = [];
+
+for(var i = 0 ; i< data.length; i++){
+	ids.push(data[i].id);
+	ppu.push(data[i].ppu);
+	for(var j = 0; j<(data[i].batters.batter.length);j++){
+		batters.push((Object.values(data[i].batters.batter[j].type)).join(""));
+		batteryids.push((Object.values(data[i].batters.batter[j].id)).join(""));
+}
+	for(var k =0; k<(data[i].topping.length); k++){
+		toppings.push(data[i].topping[k].type);
+		toppingsids.push(data[i].topping[k].id);
+	}
+}
+
+
+printToCon("toppings: ",toUnique(toppings));
+printToCon("topping id's: ",toUnique(toppingsids));
+printToCon("batters: ",toUnique(batters));
+printToCon("batters id's: ",toUnique(batteryids));
+console.log("ppu average:"+getArraySum(ppu)/ppu.length);
+console.log("ppu sum: "+getArraySum(ppu));
+printToCon("Data id's: ",toUnique(ids));
+
+
+
+
+
+
+function toUnique(array){               //array,placeholder,placeholder
+	let uniqe = [...new Set(array)];
+	return uniqe;
+   }
+
+
+
+  function printToCon(stringe,arrayb){
+	var res = ', ';
+	var array_content = '';
+	for (i = 0; i < arrayb.length; i++)
+	  array_content = array_content + arrayb[i] + res;
+  
+	console.log(stringe,array_content);
+  }
+
+  function getArraySum(a){
+    var total=0;
+    for(var i in a) { 
+        total += a[i];
+    }
+    return total;
+}
